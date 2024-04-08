@@ -5,12 +5,12 @@
 ---
 # C# / .NET
 - [Overview](./csharp/overview.md)
-- [Resources](./haskell/resources.md)
+- [Resources](./csharp/resources.md)
 
 ---
 # Rust
 - [Overview](./rust/overview.md)
-- [Resources](./haskell/resources.md)
+- [Resources](./rust/resources.md)
     - [Basic Types & Traits](./rust/types_traits.md)
     - [Generics & Traits](./rust/generics_traits.md)
     - [Basic Control Flow](./rust/control_flow.md)
