@@ -1,3 +1,5 @@
 - Deref
 - Debug
 - Drop
+- Send
+- Sync

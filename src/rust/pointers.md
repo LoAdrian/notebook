@@ -3,6 +3,8 @@
 | Box       | x               |             |                    |                         |
 | Rc        |                 |             | x                  |                         |
 | RefCell   | x               |             |                    | x                       |
+| Arc       |                 | x           | x                  |                         |
+| Mutex     | x               | x           |                    | x                       |
 
 
 
