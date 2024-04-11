@@ -21,7 +21,7 @@
     - [Modularization](./rust/modularization.md)
     - [Collections](./rust/collections.md)
     - [Lifetimes](./rust/lifetimes.md)
-    - [Unit Testing](./rust/unit_testint.md)
+    - [Unit Testing](./rust/unit_testing.md)
     - [Iterators](./rust/iterators.md)
     - [Closures](./rust/closures.md)
     - [Cargo](./rust/cargo.md)
