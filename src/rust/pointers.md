@@ -9,7 +9,7 @@
 
 
 
-# `Box<T>`
+# `std::boxed::Box<T>`
 - `Box<T>` owns its data singularly
 
 ## API
@@ -31,14 +31,14 @@ enum List {
 let list = Cons( 1, Box::new( Cons( 2, Box::new(3, Nil) ) ) );
 ```
 
-# `Rc<T>`
+# `std::rc::Rc<T>`
 - `Rc<T>` allows for multiple ownership
 - Rc uses reference counting
 
 ## API
 - `impl<T> Rc<T>`
     - `new(x: T) -> Rc<T>`
-    - `Rc::clone(x: &T) -> Rc<T>`
+    - `Rc::clone(&self) -> Rc<T>`
     - `Rc::strong_count(x: &Rc<T>)`
 
 ## Examples
@@ -52,7 +52,7 @@ let b = Cons(3, Rc::clone(&a));
 let c = Cons(4, Rc::clone(&a));
 ```
 
-# `RefCell<T>`
+# `std::cell::RefCell<T>`
 - Uses interior mutability
 - Borrowing rules are enforced at runtime 
 - Represents single ownership over the data it holds.
@@ -68,3 +68,59 @@ let c = Cons(4, Rc::clone(&a));
     - `get_mut(&mut self) -> &mut T`
 
 ## Examples
+```rust
+let x = Rc::new( RefCell::new(42) );
+let y = Rc::clone(x);
+let x_mut = x.borrow_mut();
+*x_mut += 1337; // mutable access to a shared ownership value
+```
+
+# `std::sync::Arc<T>`
+- Threadsafe version of Rc<T>`
+
+## API
+- `impl<T> Arc<T>`
+    - `new(x: T) -> Arc<T>`
+    - `Arc::clone(&self) -> Arc<T>`
+    - `Arc::strong_count(x: &Arc<T>)`
+
+## Examples
+
+```rust
+let counter = Arc::new(Mutex::new(0));
+let mut handles = vec![];
+
+for _ in 0..10 {
+    let counter = Arc::clone(&counter);
+    let handle = thread::spawn(move || {
+        let mut num = counter.lock().unwrap();
+
+        *num += 1;
+    });
+    handles.push(handle);
+}
+
+for handle in handles {
+    handle.join().unwrap();
+}
+
+println!("Result: {}", *counter.lock().unwrap());
+```
+
+# `std::sync::Mutex<T>`
+- Like `RefCell<T>` but threadsafe
+
+## API
+- `impl<T> Mutex<T>`
+    - `pub const fn new(t: T) -> Mutex<T>`
+    - `pub fn lock(&self) -> LockResult<MutexGuard<'_, T>>`
+
+## Examples 
+```Rust
+let m = Mutex::new(5);
+
+{
+    let res = m.lock(); // LockResult (May be a PoisonError whenever a thread that holds the lock fails)
+    let mut num = res.unwrap(); // MutexGuard (implements Deref and DerefMut)
+}
+```
