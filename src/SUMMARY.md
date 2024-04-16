@@ -11,7 +11,7 @@
 # Rust
 - [Overview](./rust/overview.md)
 - [Resources](./rust/resources.md)
-    - [Basic Types & Traits](./rust/basic_types.md)
+    - [Basic Types](./rust/basic_types.md)
     - [Common Traits](./rust/common_traits.md)
     - [Generics & Traits](./rust/generics_traits.md)
     - [Basic Control Flow](./rust/control_flow.md)
@@ -28,6 +28,7 @@
     - [Pointers](./rust/pointers.md)
     - [Concurrency](./rust/concurrency.md)
     - [Patternmatching](./rust/patternmatching.md)
+
 ---
 # C++
 - [Overview](./cpp/overview.md)
