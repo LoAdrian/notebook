@@ -12,6 +12,13 @@ fn doSomethingElse<'a>(x: &'a str, y: &'a str) -> &'a str {
   // the lifetime of the returned slice is at least as long as the shortest lifetime of the parameters
 }
 ```
+## Methods
+```rust
+impl<'a> S<'a> {
+  fn hello(&'a str) -> &'a Self {
+  }
+}
+```
 
 ## Structs
 ```rust
@@ -25,7 +32,7 @@ struct S<'a> {
 
 # Elision-Rules
 1. Each reference-parameter is assigned an individual lifetime
-2. There is exactly one life-time parameter of the inputs that is assigned to all output
+2. If there is exectly one input parameter, its lifetime is assigned to all output
 3. If any input-reference is `&self` or `&mut self` then the lifetime of said reference is assigned to the output
 
 ## Examples
@@ -39,3 +46,9 @@ fn longest(x: &str, y: &str) -> &str {
 fn longest<'a, 'b>(x: &'a str, y: &'b str) -> &str { //after first rule
 //second rule cannot be applied because of ambiguous possibilities --> explicit lifetime parameters / annotations needed.
 ```
+
+# Static Lifetime
+```rust
+let s: &'static str = "String literals are always static";
+```
+- `'static` denotes that a reference can live for the entire runtime of the program.
